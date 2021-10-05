@@ -1,23 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
+    <div class="row">
+        <div class="col-sm">
+            @include('_sidebar-links')
+        </div>
+        <div class="col-sm-8">
+            @include('_publish-tweet')
+            <div class="card mt-4" style="border: 1px solid #d9d2d2; border-radius: 1.25rem;">
+                @foreach(range(1,10) as $i)
+                    @include('_tweet')
+                @endforeach
             </div>
         </div>
+        <div class="col-sm" style="background-color: #a7bbff; border-radius: 1.25rem;">
+            @include('_friends-list')
+        </div>
     </div>
-</div>
 @endsection
