@@ -6,14 +6,11 @@
             style="max-width: 7%; height: fit-content";
             >
             <div>
-                <h3 class="mt-3" style="font-size: 1.0rem; font-weight: 700; color:black;">John Doe</h4>
+                <h3 class="mt-3" style="font-size: 1.0rem; font-weight: 700; color:black;">{{ $tweet->owner->name }}</h4>
             </div>
         </div>
         <p class="card-text mt-2" style="font-size: 1.0rem; font-weight: 500; color:black;">
-            Presumably, if you're watching this series, 
-            you've already made the decision to embrace all that Laravel has to offer. 
-            However, if you're still on the fence, give me just a moment to sell you on why 
-            I believe Laravel is the best framework choice in the PHP world.
+            {{ $tweet->body }}
         </p>
     </div>
     <hr>

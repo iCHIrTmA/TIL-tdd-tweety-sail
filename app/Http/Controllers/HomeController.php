@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $tweets = auth()->user()->timeline();
+        
+        return view('home', compact('tweets'));
     }
 }
