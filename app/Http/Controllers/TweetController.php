@@ -17,5 +17,7 @@ class TweetController extends Controller
             'user_id' => auth()->user()->id,
             'body' => $request->body,
         ]);
+
+        return redirect('home');
     }
 }

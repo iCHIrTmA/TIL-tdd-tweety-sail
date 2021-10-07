@@ -36,9 +36,24 @@ class TweetTest extends TestCase
         $tweet = ['body' => 'Hello World'];
     
         $this->actingAs($user)
+            ->followingRedirects()
             ->post('/tweets', $tweet)
             ->assertStatus(200);
 
         $this->assertDatabaseHas('tweets', $tweet);
+    }
+
+    /**
+     * @test
+     */
+    public function tweets_are_required(): void
+    {
+        $user = User::factory()->create();
+
+        $tweet = ['body' => ''];
+    
+        $this->actingAs($user)
+            ->post('/tweets', $tweet)
+            ->assertSessionHasErrors('body');
     }
 }
