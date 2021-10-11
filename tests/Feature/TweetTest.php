@@ -29,6 +29,35 @@ class TweetTest extends TestCase
     /**
      * @test
      */
+    public function a_user_can_see_his_tweets_and_tweets_of_users_he_follows():void
+    {
+        $this->withoutExceptionHandling();
+        // user to follow
+        $first_user = User::factory()->create();
+
+        // users to be followed
+        $second_user = User::factory()->create();
+        $third_user = User::factory()->create();
+
+
+        $first_user->follow($second_user);
+        $first_user->follow($third_user);
+
+        Tweet::factory()->create(['user_id' => $first_user]);
+        Tweet::factory()->create(['user_id' => $second_user]);
+        Tweet::factory()->create(['user_id' => $third_user]);
+
+        $this->actingAs($first_user)
+            ->get('/home')
+            ->assertStatus(200)
+            ->assertSee($first_user->tweets->first()->body)
+            ->assertSee($second_user->tweets->first()->body)
+            ->assertSee($third_user->tweets->first()->body);
+    }
+
+    /**
+     * @test
+     */
     public function user_publish_a_tweet(): void
     {
         $user = User::factory()->create();

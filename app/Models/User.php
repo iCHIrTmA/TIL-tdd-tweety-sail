@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
@@ -46,7 +47,17 @@ class User extends Authenticatable
 
     public function timeline(): Collection
     {
-        return Tweet::where('user_id', $this->id)->get();
+        $followed_users_ids = $this->follows()->pluck('id');
+
+        return Tweet::whereIn('user_id', $followed_users_ids)
+                ->orWhere('user_id', $this->id)
+                ->latest()
+                ->get();
+    }
+
+    public function tweets(): HasMany
+    {
+        return $this->hasMany(Tweet::class);
     }
 
     public function follow(User $user_to_follow)
