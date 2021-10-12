@@ -1,7 +1,7 @@
 <ul class="list-group">
     <!-- TODO: extract style to class; conver to card? check mobile view -->
     <li class="list-unstyled mb-2"> 
-        <a href="/" style="font-size: 1.2rem; font-weight: 700; color:black;">
+        <a href="{{ route('home') }}" style="font-size: 1.2rem; font-weight: 700; color:black;">
             Home
         </a>
     </li>
@@ -31,7 +31,7 @@
         </a>
     </li>
     <li class="list-unstyled mb-2">
-        <a href="#" style="font-size: 1.2rem; font-weight: 700; color:black;">
+        <a href="{{ route('profiles.show', auth()->user())}}" style="font-size: 1.2rem; font-weight: 700; color:black;">
             Profile
         </a>
     </li>
