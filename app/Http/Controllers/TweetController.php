@@ -11,7 +11,7 @@ class TweetController extends Controller
     {
         $tweets = auth()->user()->timeline();
         
-        return view('home', compact('tweets'));
+        return view('tweets.index', compact('tweets'));
     }
 
     public function store(Request $request)

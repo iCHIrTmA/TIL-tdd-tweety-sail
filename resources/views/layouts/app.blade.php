@@ -77,7 +77,17 @@
 
         <main class="py-4">
             <div class="container">
-                @yield('content')
+                <div class="row">
+                    <div class="col-sm">
+                        @include('_sidebar-links')
+                    </div>
+                    <div class="col-sm-8">
+                        @yield('content')
+                    </div>
+                    <div class="col-sm" style="background-color: #a7bbff; border-radius: 1.25rem;">
+                        @include('_friends-list')
+                    </div>
+                </div>
             </div>
         </main>
     </div>
