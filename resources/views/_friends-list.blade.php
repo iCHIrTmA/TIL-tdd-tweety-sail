@@ -2,14 +2,14 @@
 <ul class="list-group">
     @foreach(auth()->user()->follows as $user)
         <li class="list-unstyled mb-2" style="font-size: 1rem; font-weight: 700;">
-            <div>
+            <a href="{{ route('profiles.show', $user) }}">
                 <img src="{{ asset('images/default-avatar.jpg') }}" 
                 alt=""
                 class="rounded-circle mr-2"
                 style="max-width: 25%"
                 >
                 {{ $user->name }}
-            </div>
+            </a>
         </li>
     @endforeach
 </ul>
