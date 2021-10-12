@@ -20,7 +20,7 @@ class TweetTest extends TestCase
         $tweet = Tweet::factory()->create();
 
         $this->actingAs($tweet->owner)
-            ->get('/home')
+            ->get(route('home'))
             ->assertStatus(200)
             ->assertSee($tweet->owner->name)
             ->assertSee($tweet->body);
@@ -39,7 +39,7 @@ class TweetTest extends TestCase
         $second_user = User::factory()->create();
         $third_user = User::factory()->create();
 
-
+        // follow the users
         $first_user->follow($second_user);
         $first_user->follow($third_user);
 
@@ -48,7 +48,7 @@ class TweetTest extends TestCase
         Tweet::factory()->create(['user_id' => $third_user]);
 
         $this->actingAs($first_user)
-            ->get('/home')
+            ->get(route('home'))
             ->assertStatus(200)
             ->assertSee($first_user->tweets->first()->body)
             ->assertSee($second_user->tweets->first()->body)
@@ -58,8 +58,10 @@ class TweetTest extends TestCase
     /**
      * @test
      */
-    public function user_publish_a_tweet(): void
+    public function user_can_publish_a_tweet(): void
     {
+        // $this->withoutExceptionHandling();
+
         $user = User::factory()->create();
 
         $tweet = ['body' => 'Hello World'];

@@ -1,6 +1,6 @@
 <div class="card" style="border: 2px solid #b4b4fb; border-radius: 1.25rem;">
     <div class="card-body">
-        <form method="POST" action="{{ route('tweet.store') }}">
+        <form method="POST" action="{{ route('tweets.store') }}">
             @csrf
             <div class="form-group">
                 <textarea name="body" class="form-control" style="border: 1px solid white" rows="3" placeholder="What's up Doc?"></textarea>
