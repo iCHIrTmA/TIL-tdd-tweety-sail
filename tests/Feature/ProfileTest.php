@@ -65,7 +65,7 @@ class ProfileTest extends TestCase
     /**
      * @test
      */
-    public function a_user_can_edit_his_own_profile():void
+    public function a_user_can_see_edit_page_for_his_own_profile():void
     {
         $this->withoutExceptionHandling();
 
@@ -80,7 +80,7 @@ class ProfileTest extends TestCase
     /**
      * @test
      */
-    public function a_user_cannot_edit_others_profile():void
+    public function a_user_cannot_see_edit_page_for_others_profile():void
     {
         $first_user = User::factory()->create();
         $second_user = User::factory()->create();
@@ -88,5 +88,42 @@ class ProfileTest extends TestCase
         $this->actingAs($first_user)
             ->get(route('profiles.edit', $second_user->username))
             ->assertStatus(403);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_can_see_update_his_own_profile():void
+    {
+        $this->withoutExceptionHandling();
+
+        $user = User::factory()->create();
+
+        $this->assertDatabaseHas('users', [
+            'username' => $user->username,
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+
+        $newData = [
+            'username' => 'CHANGED_username',
+            'name' => 'CHANGED name',
+            'email' => 'CHANGED_email@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $this->actingAs($user)
+            ->followingRedirects()
+            ->patch(route('profiles.update', $user->username), $newData)
+            ->assertStatus(200);
+
+        // TODO: assert user wasRecentlyUpdate()
+        
+        $this->assertDatabaseHas('users', [
+            'username' => $newData['username'],
+            'name' => $newData['name'],
+            'email' => $newData['email'],
+        ]);
     }
 }
