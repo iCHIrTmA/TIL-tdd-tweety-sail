@@ -16,7 +16,9 @@
             <p class="mb-0"> {{ $user->created_at->diffForHumans() }}</p>
         </div>
         <div class="d-flex">
-            <a href="#" class="btn btn-outline-secondary" style="border-radius: 1.25rem">Edit Profile</a>
+            @if(current_user()->is($user))
+                <a href="#" class="btn btn-outline-secondary" style="border-radius: 1.25rem">Edit Profile</a>
+            @endif
             <x-follow-button :user="$user"></x-follow-button>
         </div>
     </div>

@@ -9,7 +9,7 @@ class TweetController extends Controller
 {
     public function index()
     {
-        $tweets = auth()->user()->timeline();
+        $tweets = current_user()->timeline();
         
         return view('tweets.index', compact('tweets'));
     }
@@ -21,7 +21,7 @@ class TweetController extends Controller
         ]);
 
         Tweet::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => current_user()->id,
             'body' => $request->body,
         ]);
 

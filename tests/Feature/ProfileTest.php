@@ -28,4 +28,37 @@ class ProfileTest extends TestCase
             ->assertSee($user->name)
             ->assertSee($user->tweets->first()->body);
     }
+
+    /**
+     * @test
+     */
+    public function a_user_can_see_edit_button_but_cannot_see_follow_me_button_in_his_own_profile():void
+    {
+        $this->withoutExceptionHandling();
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get(route('profiles.show', $user->name))
+            ->assertStatus(200)
+            ->assertSee('Edit Profile')
+            ->assertDontSee('Follow me');
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_cannot_see_edit_button_but_cansee_follow_me_button_in_other_users_profile():void
+    {
+        $this->withoutExceptionHandling();
+
+        $first_user = User::factory()->create();
+        $second_user = User::factory()->create();
+
+        $this->actingAs($first_user)
+            ->get(route('profiles.show', $second_user->name))
+            ->assertStatus(200)
+            ->assertDontSee('Edit Profile')
+            ->assertSee('Follow me');
+    }
 }

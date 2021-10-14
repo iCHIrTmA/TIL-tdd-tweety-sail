@@ -31,7 +31,7 @@
         </a>
     </li>
     <li class="list-unstyled mb-2">
-        <a href="{{ route('profiles.show', auth()->user())}}" style="font-size: 1.2rem; font-weight: 700; color:black;">
+        <a href="{{ route('profiles.show', current_user())}}" style="font-size: 1.2rem; font-weight: 700; color:black;">
             Profile
         </a>
     </li>
