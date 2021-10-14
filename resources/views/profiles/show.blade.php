@@ -10,12 +10,7 @@
         </div>
         <div class="d-flex">
             <a href="#" class="btn btn-outline-secondary" style="border-radius: 1.25rem">Edit Profile</a>
-            <form method="POST" action="{{ route('follows.store', $user) }}">
-                @csrf
-                <button type="submit" class="btn btn-primary ml-2" style="border-radius: 1.25rem">
-                    {{ auth()->user()->isFollowing($user) ? 'Unfollow me' : 'Follow me' }}
-                </button>
-            </form>
+            <x-follow-button :user="$user"></x-follow-button>
         </div>
     </div>
 
