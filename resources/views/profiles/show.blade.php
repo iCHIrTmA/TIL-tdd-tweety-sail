@@ -1,7 +1,14 @@
 <x-app>
 <!-- TODO: FIX mobile view -->
 <header class="mb-6 position-relative">
-    <img src="{{ asset('images/default-profile-banner.jpg') }}" alt="" style="width:45.5rem">
+    <div class="position-relative">
+        <img src="{{ asset('images/default-profile-banner.jpg') }}" alt="" style="width:45.5rem">
+        <img src="{{ asset('images/default-avatar.jpg') }}" 
+        alt=""
+        class="rounded-circle position-absolute"
+        style="width: 10rem; height: fit-content; top:150px; left: calc(50% - 6rem)"
+    >
+    </div>
     
     <div class="d-flex justify-content-between align-items-center">
         <div class="pt-2">
@@ -14,11 +21,7 @@
         </div>
     </div>
 
-    <img src="{{ asset('images/default-avatar.jpg') }}" 
-        alt=""
-        class="rounded-circle position-absolute"
-        style="width: 10rem; height: fit-content; top:150px; left: calc(50% - 6rem)"
-    >
+
     <p class="mt-3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Nunc massa lacus, fermentum et dui gravida, ultricies ultrices turpis.
