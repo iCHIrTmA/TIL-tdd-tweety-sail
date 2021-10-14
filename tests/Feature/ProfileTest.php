@@ -6,6 +6,8 @@ use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -125,5 +127,44 @@ class ProfileTest extends TestCase
             'name' => $newData['name'],
             'email' => $newData['email'],
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_can_upload_an_avatar(): void
+    {
+        $this->withoutExceptionHandling();
+
+        Storage::fake('public');
+
+        $user = User::factory()->create();
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+        
+        Storage::disk('public')->assertMissing('avatars/' . $file->hashName());
+        
+        $newDatawAvatar = [
+            'username' => 'CHANGED_username',
+            'name' => 'CHANGED name',
+            'avatar' => $file,
+            'email' => 'CHANGED_email@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $this->actingAs($user)
+            ->followingRedirects()
+            ->patch(route('profiles.update', $user->username), $newDatawAvatar)
+            ->assertStatus(200);
+
+        // TODO: fix to return testing/disks/public/avatars/$file->hashName()
+        // always TRUE because getAvatarAttribute returns default avatar because it does not read testing/disks
+        $this->assertNotNull($user->avatar); 
+
+        Storage::disk('public')->assertExists('avatars/' . $file->hashName());
+
+        // Clear out storage/framework/testing/disks/public after this test assertion
+        Storage::fake('public');
     }
 }
