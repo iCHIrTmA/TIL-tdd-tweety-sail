@@ -61,4 +61,32 @@ class ProfileTest extends TestCase
             ->assertDontSee('Edit Profile')
             ->assertSee('Follow me');
     }
+
+    /**
+     * @test
+     */
+    public function a_user_can_edit_his_own_profile():void
+    {
+        $this->withoutExceptionHandling();
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get(route('profiles.edit', $user->name))
+            ->assertStatus(200)
+            ->assertSee('Hi ' . $user->name . ', You can edit your details here.');
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_cannot_edit_others_profile():void
+    {
+        $first_user = User::factory()->create();
+        $second_user = User::factory()->create();
+
+        $this->actingAs($first_user)
+            ->get(route('profiles.edit', $second_user->name))
+            ->assertStatus(403);
+    }
 }

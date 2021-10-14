@@ -16,9 +16,9 @@
             <p class="mb-0"> {{ $user->created_at->diffForHumans() }}</p>
         </div>
         <div class="d-flex">
-            @if(current_user()->is($user))
-                <a href="#" class="btn btn-outline-secondary" style="border-radius: 1.25rem">Edit Profile</a>
-            @endif
+            @can('edit', $user)
+                <a href="{{ route('profiles.edit', $user)}}" class="btn btn-outline-secondary" style="border-radius: 1.25rem">Edit Profile</a>
+            @endcan
             <x-follow-button :user="$user"></x-follow-button>
         </div>
     </div>
