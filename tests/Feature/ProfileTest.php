@@ -23,7 +23,7 @@ class ProfileTest extends TestCase
         Tweet::factory()->create(['user_id' => $user]);
 
         $this->actingAs($user)
-            ->get(route('profiles.show', $user->name))
+            ->get(route('profiles.show', $user->username))
             ->assertStatus(200)
             ->assertSee($user->name)
             ->assertSee($user->tweets->first()->body);
@@ -39,7 +39,7 @@ class ProfileTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
-            ->get(route('profiles.show', $user->name))
+            ->get(route('profiles.show', $user->username))
             ->assertStatus(200)
             ->assertSee('Edit Profile')
             ->assertDontSee('Follow me');
@@ -56,7 +56,7 @@ class ProfileTest extends TestCase
         $second_user = User::factory()->create();
 
         $this->actingAs($first_user)
-            ->get(route('profiles.show', $second_user->name))
+            ->get(route('profiles.show', $second_user->username))
             ->assertStatus(200)
             ->assertDontSee('Edit Profile')
             ->assertSee('Follow me');
@@ -72,7 +72,7 @@ class ProfileTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
-            ->get(route('profiles.edit', $user->name))
+            ->get(route('profiles.edit', $user->username))
             ->assertStatus(200)
             ->assertSee('Hi ' . $user->name . ', You can edit your details here.');
     }
@@ -86,7 +86,7 @@ class ProfileTest extends TestCase
         $second_user = User::factory()->create();
 
         $this->actingAs($first_user)
-            ->get(route('profiles.edit', $second_user->name))
+            ->get(route('profiles.edit', $second_user->username))
             ->assertStatus(403);
     }
 }
