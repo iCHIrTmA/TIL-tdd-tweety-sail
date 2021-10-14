@@ -3,7 +3,7 @@
 <header class="mb-6 position-relative">
     <div class="position-relative">
         <img src="{{ asset('images/default-profile-banner.jpg') }}" alt="" style="width:45.5rem">
-        <img src="{{ asset('images/default-avatar.jpg') }}" 
+        <img src="{{ $user->avatar }}" 
         alt=""
         class="rounded-circle position-absolute"
         style="width: 10rem; height: fit-content; top:150px; left: calc(50% - 6rem)"
@@ -22,7 +22,6 @@
             <x-follow-button :user="$user"></x-follow-button>
         </div>
     </div>
-
 
     <p class="mt-3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.

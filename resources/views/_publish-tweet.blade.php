@@ -7,8 +7,8 @@
             </div>
             <hr>
             <div class="d-flex justify-content-between">
-                <img src="{{ asset('images/default-avatar.jpg') }}" 
-                alt=""
+                <img src="{{ current_user()->avatar }}" 
+                    alt=""
                     class="rounded-circle"
                     style="max-width: 5%; height: fit-content;"
                 >

@@ -23,6 +23,7 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user)
     {
+        // dd($request->avatar);
         $request->validate([
             'username' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('users')->ignore($user)],
             'name' => ['required', 'string', 'max:255'],
@@ -36,6 +37,12 @@ class ProfileController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        if($request->has('avatar')) {
+            $user->update([
+                'avatar' => $request->avatar->store('avatars'),
+            ]);
+        }
 
         return redirect(route('profiles.show', $user));
     }

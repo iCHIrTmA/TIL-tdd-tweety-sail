@@ -1,7 +1,7 @@
 <div class="card-body">
     <div class="row d-flex flex-row align-items-center justify-content-start">
         <a href="{{ route('profiles.show', $tweet->owner) }}">
-            <img src="{{ asset('images/default-avatar.jpg') }}" 
+            <img src="{{ $tweet->owner->avatar }}" 
             alt=""
             class="rounded-circle mx-3"
             style="max-width: 50px;"

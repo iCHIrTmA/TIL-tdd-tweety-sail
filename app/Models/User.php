@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tweet::class)->latest();
     }
+
+    public function getAvatarAttribute($value)
+    {
+        return asset($value ? 'storage/' . $value : asset('images/default-avatar.jpg'));
+    }
 }

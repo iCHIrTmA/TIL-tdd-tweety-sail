@@ -2,7 +2,7 @@
 <h3 class="font-weight-bold">Hi {{ $user->name}}, You can edit your details here.</h3>
 <div class="card mt-4" style="border: 1px solid #d9d2d2; border-radius: 1.25rem;">
     <div class="card-body">
-    <form method="POST" action="{{ route('profiles.update', $user) }}">
+    <form method="POST" action="{{ route('profiles.update', $user) }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group row">
@@ -26,6 +26,20 @@
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
 
                 @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="avatar" class="col-md-3 col-form-label text-md-right">{{ __('Avatar') }}</label>
+
+            <div class="col-md-8">
+                <input id="avatar" type="file" class="form-control-file @error('avatar') is-invalid @enderror" name="avatar"  autofocus>
+
+                @error('avatar')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
