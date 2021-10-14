@@ -9,6 +9,7 @@ trait Followable
 {
     public function follow(User $user_to_follow)
     {
+        // dd($user_to_follow);
         $this->follows()->save($user_to_follow);
     }
 
@@ -25,5 +26,10 @@ trait Followable
     public function isFollowing(User $user_in_question): bool
     {
         return $this->follows()->where('following_user_id', $user_in_question->id)->exists();
+    }
+
+    public function toggleFollow($given_user): void
+    {
+        $this->isFollowing($given_user) ? $this->unfollow($given_user) : $this->follow($given_user);
     }
 }

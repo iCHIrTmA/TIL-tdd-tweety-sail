@@ -8,9 +8,14 @@
             <h1 class="font-weight-bold mb-0"> {{ $user->name }}</h1>
             <p class="mb-0"> {{ $user->created_at->diffForHumans() }}</p>
         </div>
-        <div>
+        <div class="d-flex">
             <a href="#" class="btn btn-outline-secondary" style="border-radius: 1.25rem">Edit Profile</a>
-            <a href="#" class="btn btn-primary" style="border-radius: 1.25rem">Follow me</a>
+            <form method="POST" action="{{ route('follows.store', $user) }}">
+                @csrf
+                <button type="submit" class="btn btn-primary ml-2" style="border-radius: 1.25rem">
+                    {{ auth()->user()->isFollowing($user) ? 'Unfollow me' : 'Follow me' }}
+                </button>
+            </form>
         </div>
     </div>
 
