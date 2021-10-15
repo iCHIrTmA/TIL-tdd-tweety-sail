@@ -6,5 +6,5 @@ Make 2 line Controllers (services)
 Unit and Feature Test overcompensate due to lack of integration test
 
 
-![Schema](https://t.gyazo.com/teams/nabepero/966bb874af9e582d868c7408b06866ce.png])
+![Schema](https://t.gyazo.com/teams/nabepero/966bb874af9e582d868c7408b06866ce.png)
 
