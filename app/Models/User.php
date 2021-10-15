@@ -61,4 +61,22 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($password);
     }
+
+    public function likedTweets(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function like($tweet)
+    {
+        $this->likedTweets()->create(['tweet_id' => $tweet->id]);
+    }
+
+    public function unlike($tweet)
+    {
+        $this->likedTweets()
+            ->where('user_id', $this->id)
+            ->where('tweet_id', $tweet->id)
+            ->delete();
+    }
 }

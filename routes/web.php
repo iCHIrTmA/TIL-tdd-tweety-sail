@@ -3,6 +3,7 @@
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Auth;
@@ -35,5 +36,9 @@ Route::middleware('auth')->group(function () {
 
     // Explore
     Route::get('/explore', [ExploreController::class, 'index'])->name('explore.index');
+
+    // Like
+    Route::post('/like/{user:username}/tweets/{tweet}', [LikeController::class, 'store'])->name('like.store');
+    Route::delete('/like/{user:username}/tweets/{tweet}', [LikeController::class, 'destroy'])->name('like.destroy');
 });
 
