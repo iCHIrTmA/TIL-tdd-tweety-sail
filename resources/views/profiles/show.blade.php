@@ -13,7 +13,7 @@
     <div class="d-flex justify-content-between align-items-center">
         <div class="pt-2">
             <h1 class="font-weight-bold mb-0"> {{ $user->name }}</h1>
-            <p class="mb-0"> {{ $user->created_at->diffForHumans() }}</p>
+            <p class="mb-0"> Joined {{ $user->created_at->diffForHumans() }}</p>
         </div>
         <div class="d-flex">
             @can('edit', $user)

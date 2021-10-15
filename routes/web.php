@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -31,5 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profiles/{user:username}', [ProfileController::class, 'show'])->name('profiles.show');
     Route::get('/profiles/{user:username}/edit', [ProfileController::class, 'edit'])->middleware('can:edit,user')->name('profiles.edit');
     Route::patch('/profiles/{user:username}', [ProfileController::class, 'update'])->middleware('can:edit,user')->name('profiles.update');
+
+    // Explore
+    Route::get('/explore', [ExploreController::class, 'index'])->name('explore.index');
 });
 
