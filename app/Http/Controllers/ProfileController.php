@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -27,6 +24,7 @@ class ProfileController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('users')->ignore($user)],
             'name' => ['required', 'string', 'max:255'],
+            'avatar' => ['file'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -35,7 +33,7 @@ class ProfileController extends Controller
             'username' => $request->username,
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
 
         if($request->has('avatar')) {

@@ -127,6 +127,11 @@ class ProfileTest extends TestCase
             'name' => $newData['name'],
             'email' => $newData['email'],
         ]);
+
+        // assert password was hashed (setPasswordAttribute)
+        $this->assertDatabaseMissing('users', [
+            'password' => $newData['password'],
+        ]);
     }
 
     /**

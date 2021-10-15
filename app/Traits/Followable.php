@@ -30,6 +30,7 @@ trait Followable
 
     public function toggleFollow($given_user): void
     {
-        $this->isFollowing($given_user) ? $this->unfollow($given_user) : $this->follow($given_user);
+        // many-to-many rel attach() or detach()
+        $this->follows()->toggle($given_user);
     }
 }
