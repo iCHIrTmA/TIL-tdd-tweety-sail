@@ -4,7 +4,7 @@
 - make proper readme 
 - database seeder
 - Clean up CSS make components and dix mobile view
-- Make 2 line Controllers (services)
+- Make 2 line Controllers (formrequests and services)
 - Unit and Feature Test overcompensate due to lack of integration test
 
 
