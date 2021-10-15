@@ -13,13 +13,13 @@ class LikeController extends Controller
         // dd($user, $tweet);
         $user->like($tweet);
 
-        return response(200);
+        return back();
     }
 
     public function destroy(User $user, Tweet $tweet)
     {
         $user->unlike($tweet);
 
-        return response(200);
+        return back();
     }
 }

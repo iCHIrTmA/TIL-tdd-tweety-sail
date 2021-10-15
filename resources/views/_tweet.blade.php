@@ -14,6 +14,9 @@
     <p class="card-text mt-4" style="font-size: 1.0rem; font-weight: 500; color:black;">
         {{ $tweet->body }}
     </p>
+
+    <x-like-buttons :tweet="$tweet"></x-like-buttons>
+
 </div>
 @unless($loop->last)
     <hr>
