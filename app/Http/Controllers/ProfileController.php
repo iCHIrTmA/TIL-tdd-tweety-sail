@@ -38,7 +38,7 @@ class ProfileController extends Controller
 
         if($request->has('avatar')) {
             $user->update([
-                'avatar' => $request->avatar->store('avatars'),
+                'avatar' => $request->avatar->storeAs('avatars', $request->file('avatar')->getClientOriginalName()),
             ]);
         }
 

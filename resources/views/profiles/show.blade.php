@@ -2,12 +2,12 @@
 <!-- TODO: FIX mobile view -->
 <header class="mb-6 position-relative">
     <div class="position-relative">
-        <img src="{{ asset('images/default-profile-banner.jpg') }}" alt="" style="width:45.5rem">
+        <img src="{{ asset('images/default-profile-banner.jpg') }}" style="width:45.5rem">
         <img src="{{ $user->avatar }}" 
-        alt=""
-        class="rounded-circle position-absolute"
-        style="width: 10rem; height: fit-content; top:150px; left: calc(50% - 6rem)"
-    >
+            data-cy="avatar-img"
+            class="rounded-circle position-absolute"
+            style="width: 10rem; height: fit-content; top:150px; left: calc(50% - 6rem)"
+        >
     </div>
     
     <div class="d-flex justify-content-between align-items-center">

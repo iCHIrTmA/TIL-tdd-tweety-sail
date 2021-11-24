@@ -37,7 +37,7 @@
             <label for="avatar" class="col-md-3 col-form-label text-md-right">{{ __('Avatar') }}</label>
 
             <div class="col-md-8">
-                <input id="avatar" type="file" class="form-control-file @error('avatar') is-invalid @enderror" name="avatar"  autofocus>
+                <input data-cy="choose-file-button" id="avatar" type="file" class="form-control-file @error('avatar') is-invalid @enderror" name="avatar"  autofocus>
 
                 @error('avatar')
                     <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
             <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('Password') }}</label>
 
             <div class="col-md-8">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                <input data-cy="password" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -79,13 +79,13 @@
             <label for="password-confirm" class="col-md-3 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
             <div class="col-md-8">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                <input data-cy="password-confirm" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
             </div>
         </div>
 
         <div class="form-group row mb-0 justify-content-center">
             <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
+                <button data-cy="update-button" type="submit" class="btn btn-primary">
                     {{ __('Update') }}
                 </button>
             </div>

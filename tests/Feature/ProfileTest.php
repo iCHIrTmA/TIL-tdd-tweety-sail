@@ -167,6 +167,7 @@ class ProfileTest extends TestCase
         // always TRUE because getAvatarAttribute returns default avatar because it does not read testing/disks
         $this->assertNotNull($user->avatar); 
 
+        // TODO: fileName is NOT hashed
         Storage::disk('public')->assertExists('avatars/' . $file->hashName());
 
         // Clear out storage/framework/testing/disks/public after this test assertion
